@@ -90,7 +90,7 @@ class AdminPropertyController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() and $form->isValid()) {
-                    
+
             // $this->em->persist($property); // Pas besoin ici
             $this->em->flush();
 
