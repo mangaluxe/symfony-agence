@@ -1,5 +1,9 @@
 =====================================================================================
 Doctrine : pour correspondre avec la BDD
+
+Entity: Représente une table
+Manager : Permet de manipuler une ligne : Créer/Modifier/Effacer
+Repository : Permet de faire des sélections : Lire
 =====================================================================================
 
 1. Dans le fichier .env, mettre : DATABASE_URL=mysql://root:@127.0.0.1:3306/nom_bdd
@@ -36,8 +40,9 @@ Par: @ORM\Column(type="boolean", options={"default": false})
 
 Faire migration pour finir
 
-=========================================
+=====================================================================================
 Jointures :
+=========================================
 
 OneToOne = 1:1
 ManyToOne = 1:n
@@ -121,6 +126,23 @@ Entrée
 Entrée
 
 Ensuite, aller dans le fichier src\Entity\Participation.php\, supprimer private $id, ajouter * @ORM\Id() dans private $event; et private $user;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ===============================================================================
 Créer des entités
