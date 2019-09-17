@@ -1,0 +1,174 @@
+Protection basique (Dans config\package\security.yaml) :
+=======================================================
+
+security:
+    providers:
+        in_memory:
+            memory: # Ajouté
+                users: # Ajouté
+                    1234:
+                        password: 1234 # Ajouté
+                        roles: ROLE_ADMIN # Ajouté
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            anonymous: true
+
+            # activate different ways to authenticate
+
+            http_basic: true # Ajouté
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN } # Ajouté
+        # - { path: ^/profile, roles: ROLE_USER }
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+==============================================================
+Sécurité avec formulaire :
+==============================================================
+
+Dans config\package\security.yaml :
+security:
+    providers:
+        from_database:
+            entity:
+                class: App\Entity\User
+                property: username
+                
+                
+    (...)
+                
+                
+    form_login: # Ajouté
+        check_path: login # Ajouté
+
+======
+Dans Cmder: php bin/console make:entity User
+======
+- Créer les champs : username et password
+
+======
+Dans Entity\User.php :
+======
+
+ - Ajouter sur la ligne class User :
+      class User implements UserInterface,\Serializable // Ajouté: implements UserInterface,\Serializable
+
+- Ajouter en haut :
+      use Symfony\Component\Security\Core\User\UserInterface; // Ajouté
+      use Symfony\Component\Security\Core\Role\Role; // Ajouté
+      use Serializable; // Ajouté
+      
+- Ajouter en bas :
+
+    /**
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return ['ROLE_ADMIN'];
+    }
+
+    /**
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function serialize()
+    {
+        return serialize([
+            $this->$id,
+            $this->username,
+            $this->password
+        ]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password
+        ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+
+======
+Créer Controller\SecurityController.php :
+======
+
+    <?php
+    namespace App\Controller;
+
+    use Symfony\Component\Routing\Annotation\Route; // Pour Routes
+    use Symfony\Component\Security\Http\Authentication\AuthenticationUtils; // Ajouté
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Pour class extends
+
+    class SecurityController extends AbstractController
+    {
+        /**
+         * @Route("/login", name="login")
+         */
+        public function login(AuthenticationUtils $authenticationUtils)
+        {
+            $error = $authenticationUtils->getLastAuthenticationError();
+            $lastUsername = $authenticationUtils->getLastUsername();
+            return $this->render('security/login.html.twig', [
+                'last_username' => $lastUsername,
+                'error' => $error
+            ]);
+        }
+    }
+
+
+======
+Créer login.html.twig :
+======
+
+    {% extends 'base.html.twig' %}
+
+    {% block title 'Connexion' %}
+
+    {% block body %}
+
+        <div class="container">
+
+            <h1 class="my-5 text-center">Connexion</h1>
+
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey }}
+                </div>
+            {% endif %}
+
+            <form action="{{ path('login') }}" method="post">
+
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="_password" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Connexion</button>
+
+            </form>
+        </div>
+
+    {% endblock %}

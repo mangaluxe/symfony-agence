@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Voir tous nos biens' %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h1>Bienvenue sur la page home<br>Voir tous nos biens</h1>
+    <p>Pull in Bootstrap’s source files into nearly any project with some of the most popular package managers. No matter the package</p>
+</div>
+
+<div class="container">
+    <h2>Les derniers biens</h2>
+    <div class="row flex">
+    {% for property in properties %}
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
+                    </h5>
+                    <p class="card-text">{{ property.city }} ({{ property.postalCode }})</p>
+                    {# <div class="text-primary">{{ property.price | number_format(0, '',' ' )}} €</div> #} {# Méthode 1 #}
+                    <div class="text-primary">{{ property.formattedPrice }} €</div> {# Méthode 2. On a créé formattedPrice est dans Property.php #}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
