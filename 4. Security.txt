@@ -108,6 +108,9 @@ Dans Entity\User.php :
 
 ======
 Créer Controller\SecurityController.php :
+
+- Taper: php bin/console make:controller
+- Puis (exemple): SecurityController
 ======
 
     <?php
