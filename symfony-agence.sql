@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 17 sep. 2019 à 10:23
+-- Généré le :  mer. 18 sep. 2019 à 17:09
 -- Version du serveur :  10.4.6-MariaDB
 -- Version de PHP :  7.3.9
 
@@ -45,7 +45,10 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 ('20190910094303', '2019-09-10 09:43:12'),
 ('20190911083329', '2019-09-11 08:33:40'),
 ('20190911123948', '2019-09-11 12:39:55'),
-('20190912125512', '2019-09-12 12:55:20');
+('20190912125512', '2019-09-12 12:55:20'),
+('20190918120942', '2019-09-18 12:09:54'),
+('20190918123342', '2019-09-18 12:33:48'),
+('20190918123423', '2019-09-18 12:34:28');
 
 -- --------------------------------------------------------
 
@@ -75,10 +78,11 @@ CREATE TABLE `property` (
 --
 
 INSERT INTO `property` (`id`, `title`, `description`, `surface`, `rooms`, `bedrooms`, `floor`, `price`, `heat`, `city`, `postal_code`, `sold`, `created_at`, `address`) VALUES
-(9, 'Titre bien 1', 'Description ici !', 30, 4, 3, 1, 500000, 1, 'Lille', '5900', 0, '2019-09-12 11:02:15', '3 rue de bethune'),
+(9, 'Titre bien n1.', 'Description ici !', 30, 4, 3, 1, 500000, 1, 'Lille', '5900', 0, '2019-09-12 11:02:15', '3 rue de bethune'),
 (10, 'Super maison', 'Aucune dexruigihnkldfgbn', 100, 2, 2, 1, 100000, 1, 'Lille', '59000', 0, '2019-09-12 11:03:12', '9 rue de martin'),
 (12, 'Poubelle', '1', 12, 1, 1, 1, 1, 0, '1', '55555', 0, '2019-09-12 12:20:58', '1'),
-(13, 'Poubelle2+', '1111', 11, 11, 1, 1, 11, 0, '1', '11111', 0, '2019-09-12 14:08:19', '23 rue de bethune');
+(13, 'Poubelle 2', '1111 Rien à dire !', 11, 11, 1, 1, 11, 0, '1', '11111', 0, '2019-09-12 14:08:19', '23 rue de bethune'),
+(14, 'Titre 369', 'rtes r dr gdr g', 44, 5, 4, 1, 444440, 1, 'lille', '59000', 0, '2019-09-18 13:57:40', 'rue de ciel');
 
 -- --------------------------------------------------------
 
@@ -89,15 +93,17 @@ INSERT INTO `property` (`id`, `title`, `description`, `surface`, `rooms`, `bedro
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(1, '1234', '1234');
+INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES
+(1, '1234', '$2y$13$E6ZUHK91C5qRnw3HcWV.6.RosBSoQgARsWGHUcqOvT1H0J96GRO4K', '1234@1234.fr'),
+(3, '123456', '$2y$13$dZGw4lNdgS5JOdb9lYB1ZeBV88Z2ykGoKPhiUHmc2wFCR4KLHFD7K', '123456@123456.fr');
 
 --
 -- Index pour les tables déchargées
@@ -129,13 +135,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
