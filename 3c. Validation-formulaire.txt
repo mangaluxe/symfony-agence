@@ -1,0 +1,98 @@
+﻿======================================================================================
+Dans fichier src\Entity\Article.php :
+===========================================
+
+use Symfony\Component\Validator\Constraints as Assert; // Ajouté pour validation de formulaire
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // Ajouté pour UniqueEntity
+
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
+ * @UniqueEntity("title")
+ * @UniqueEntity(fields="username", message="Pseudo déjà pris")
+ * @UniqueEntity(fields="email", message="Email déjà pris")
+ */
+class Article
+{
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 50,
+     *    minMessage = "Minimum {{ limit }} caractères !",
+     *    maxMessage = "Maximum {{ limit }} caractères !"
+     * )
+     */
+    private $title;
+    
+    
+
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\Length(
+     *    min = 2,
+     *    max = 100,
+     *    minMessage = "Minimum {{ limit }} caractères !",
+     *    maxMessage = "Maximum {{ limit }} caractères !"
+     * )
+     */
+    private $username;
+    
+    
+    
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=4, minMessage="Minimum {{ limit }} caractères !")
+     */
+    private $password;
+
+
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Erreur répétition de Mot de passe")
+     */
+    public $confirm_password;
+    
+    
+    
+    
+    
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\Length(min=10, minMessage="Minimum {{ limit }} caractères !")
+     */
+    private $content;
+    
+    
+    
+    
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 1000,
+     *      minMessage = "Interdit de vendre un bien de moins de {{ limit }}m² !",
+     *      maxMessage = "Un bien de {{ limit }}m² n'existe pas !"
+     * )
+     */
+    private $surface;
+    
+    
+    
+    
+    /**
+     * @Assert\Url(
+     *    message = "Cet url '{{ value }}' n’est pas valide !",
+     * )
+     */
+     private $url;
+    
+    
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Regex("/^[0-9]{5}$/")
+     */
+    private $postal_code;

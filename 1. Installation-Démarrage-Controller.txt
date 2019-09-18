@@ -1,4 +1,4 @@
-1. Installer Composer : https://getcomposer.org/download/
+﻿1. Installer Composer : https://getcomposer.org/download/
 
 2. Aller dans le bon dossier avec Cmder : cd ..\symfony-agence
 

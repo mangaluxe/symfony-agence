@@ -1,5 +1,0 @@
-1. Créer formulaire :
-
-Taper dans Cmder: php bin/console make:form
-Nom du formulaire. Exemple: PropertyType
-Nom de l'entité à relier. Exemple: Property

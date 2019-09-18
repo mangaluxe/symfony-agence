@@ -5,8 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity; // Ajouté pour UniqueEntity
+use Symfony\Component\Validator\Constraints as Assert; // Ajouté pour validation de formulaire
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
+ * @UniqueEntity(fields="title", message="Titre déjà utilisé")
  */
 class Property
 {
@@ -27,6 +32,12 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Minimum {{ limit }} caractères !",
+     *      maxMessage = "Maximum {{ limit }} caractères !"
+     * )
      */
     private $title;
 
@@ -37,6 +48,12 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 10,
+     *      max = 1000,
+     *      minMessage = "Interdit de vendre un bien de moins de {{ limit }}m² !",
+     *      maxMessage = "Un bien de {{ limit }}m² n'existe pas !"
+     * )
      */
     private $surface;
 

@@ -1,14 +1,14 @@
-Protection basique (Dans config\package\security.yaml) :
+ï»¿Protection basique (Dans config\package\security.yaml) :
 =======================================================
 
 security:
     providers:
         in_memory:
-            memory: # Ajouté
-                users: # Ajouté
+            memory: # AjoutÃ©
+                users: # AjoutÃ©
                     1234:
-                        password: 1234 # Ajouté
-                        roles: ROLE_ADMIN # Ajouté
+                        password: 1234 # AjoutÃ©
+                        roles: ROLE_ADMIN # AjoutÃ©
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -18,19 +18,19 @@ security:
 
             # activate different ways to authenticate
 
-            http_basic: true # Ajouté
+            http_basic: true # AjoutÃ©
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN } # Ajouté
+        - { path: ^/admin, roles: ROLE_ADMIN } # AjoutÃ©
         # - { path: ^/profile, roles: ROLE_USER }
 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 
 ==============================================================
-Sécurité avec formulaire :
+SÃ©curitÃ© avec formulaire :
 ==============================================================
 
 Dans config\package\security.yaml :
@@ -45,25 +45,25 @@ security:
     (...)
                 
                 
-    form_login: # Ajouté
-        check_path: login # Ajouté
+    form_login: # AjoutÃ©
+        check_path: login # AjoutÃ©
 
 ======
 Dans Cmder: php bin/console make:entity User
 ======
-- Créer les champs : username et password
+- CrÃ©er les champs : username et password
 
 ======
 Dans Entity\User.php :
 ======
 
  - Ajouter sur la ligne class User :
-      class User implements UserInterface,\Serializable // Ajouté: implements UserInterface,\Serializable
+      class User implements UserInterface,\Serializable // AjoutÃ©: implements UserInterface,\Serializable
 
 - Ajouter en haut :
-      use Symfony\Component\Security\Core\User\UserInterface; // Ajouté
-      use Symfony\Component\Security\Core\Role\Role; // Ajouté
-      use Serializable; // Ajouté
+      use Symfony\Component\Security\Core\User\UserInterface; // AjoutÃ©
+      use Symfony\Component\Security\Core\Role\Role; // AjoutÃ©
+      use Serializable; // AjoutÃ©
       
 - Ajouter en bas :
 
@@ -107,7 +107,7 @@ Dans Entity\User.php :
 
 
 ======
-Créer Controller\SecurityController.php :
+CrÃ©er Controller\SecurityController.php :
 
 - Taper: php bin/console make:controller
 - Puis (exemple): SecurityController
@@ -117,7 +117,7 @@ Créer Controller\SecurityController.php :
     namespace App\Controller;
 
     use Symfony\Component\Routing\Annotation\Route; // Pour Routes
-    use Symfony\Component\Security\Http\Authentication\AuthenticationUtils; // Ajouté
+    use Symfony\Component\Security\Http\Authentication\AuthenticationUtils; // AjoutÃ©
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Pour class extends
 
     class SecurityController extends AbstractController
@@ -138,7 +138,7 @@ Créer Controller\SecurityController.php :
 
 
 ======
-Créer login.html.twig :
+CrÃ©er login.html.twig :
 ======
 
     {% extends 'base.html.twig' %}

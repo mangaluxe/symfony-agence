@@ -35,32 +35,14 @@ class PropertyController extends AbstractController
      */
     public function index(): Response
     {
-        // // Une des méthodes pour ajouter des données dans la BDD (juste pour ajouter une donnée pour tester la récup de données):
-        // $property = new Property();
-        // $property->setTitle('Mon 2e bien')
-        //     ->setPrice(200000)
-        //     ->setRooms(4)
-        //     ->setBedrooms(3)
-        //     ->setDescription('Une petite description')
-        //     ->setSurface(60)
-        //     ->setFloor(4)
-        //     ->setHeat(1)
-        //     ->setCity('Montpellier')
-        //     ->setAddress('15 Boulevard Gambetta')
-        //     ->setPostalCode('34000');
-        // $em = $this->getDoctrine()->getManager();
-        // $em->persist($property);
-        // $em->flush();
 
-
-
-        // // ========== 1er méthode : ========== 
+        // // ========== 1er méthode (sans injection de dépendance) : ========== 
         // $repository = $this->getDoctrine()->getRepository(Property::class);
         // dump($repository);
         // $property = $repository->findAllVisible();
         // dump($property);
 
-        // // ========== 2e méthode (avec injection dans constructeur) : ========== 
+        // // ========== 2e méthode (avec injection de dépendance dans constructeur) : ========== 
         // $property = $this->repository->find(1);
         // $property = $this->repository->findAll();
         // $property = $this->repository->findOneBy(['floor' => 4]);
@@ -73,7 +55,7 @@ class PropertyController extends AbstractController
         // $this->em->flush();
         
         return $this->render('property/index.html.twig', [
-            'current_menu' => 'properties' // A quoi sert ce paramètre ???
+            // 'current_menu' => 'properties'
         ]);
     }
 
@@ -81,9 +63,8 @@ class PropertyController extends AbstractController
     /**
      * @Route("/biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
      * @ Property $property
-     * @return Response
      */
-    public function show(Property $property, string $slug): Response
+    public function show(Property $property, string $slug)
     {
         if ($property->getSlug() !== $slug) {
             return $this->redirectToRoute('property.show', [
@@ -96,7 +77,7 @@ class PropertyController extends AbstractController
 
         return $this->render('property/show.html.twig', [
             'property' => $property,
-            'current_menu' => 'properties' // A quoi sert ce paramètre ???
+            // 'current_menu' => 'properties'
         ]);
     }
 

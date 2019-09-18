@@ -1,0 +1,45 @@
+﻿=======================================================================================
+Créer un formulaire automatique en ligne de commande :
+php bin/console make:form
+
+===========================================
+Exemple avec PropertyType :
+=======================
+
+Nom du formulaire. Exemple: PropertyType
+Nom de l'entité à relier. Exemple: Property
+
+===========================================
+Exemple avec ArticleType :
+=======================
+
+php bin/console make:form
+
+Nom du formulaire. Exemple : ArticleType
+Relier avec l'entité. Exemple : Article
+
+===========================================
+Exemple avec RegistrationType :
+=======================
+
+php bin/console make:form
+
+Nom du formulaire. Exemple : RegistrationType
+Relier avec l'entité. Exemple : User
+
+On peut aller ensuite dans src\Form\RegistrationType.php pour ajouter :
+->add('confirm_password')
+
+Ensuite aller dans src\Entity\User.php pour ajouter :
+
+public $confirm_password;
+
+===========================================
+Exemple avec RegistrationType :
+=======================
+
+php bin/console make:form
+
+Nom du formulaire. Exemple : CommentType
+Relier avec l'entité. Exemple : Comment
+
