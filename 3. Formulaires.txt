@@ -3,13 +3,6 @@ Créer un formulaire automatique en ligne de commande :
 php bin/console make:form
 
 ===========================================
-Exemple avec PropertyType :
-=======================
-
-Nom du formulaire. Exemple: PropertyType
-Nom de l'entité à relier. Exemple: Property
-
-===========================================
 Exemple avec ArticleType :
 =======================
 
@@ -35,7 +28,7 @@ Ensuite aller dans src\Entity\User.php pour ajouter :
 public $confirm_password;
 
 ===========================================
-Exemple avec RegistrationType :
+Exemple avec CommentType :
 =======================
 
 php bin/console make:form

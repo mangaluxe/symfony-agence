@@ -1,7 +1,14 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
+            
     providers:
-        in_memory: { memory: null }
+        in_memory: { memory: ~ }
+        in_database:
+            entity:
+                class: App\Entity\User
+                property: username # Si on veut se connecter avec email, on met: email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,14 +16,12 @@ security:
         main:
             anonymous: true
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+            provider: in_database
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            form_login:
+                login_path: connexion # Mettre le nom de la route connexion
+                check_path: connexion # Mettre le nom de la route connexion
 
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+            logout:
+                path: deconnexion # Mettre le nom de la route déconnexion
+                target: home # Mettre le nom de la route de la page où il faut rediriger quand on se déconnecte
