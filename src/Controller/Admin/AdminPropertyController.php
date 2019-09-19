@@ -13,14 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Pour class 
 class AdminPropertyController extends AbstractController
 {
 
-    /**
-     * @var PropertyRepository
-     */
+    // ------ Contructeur pour Injection de dépendance : -----
     private $repository;
-
-    /**
-     * @var ObjectManager
-     */
     private $em;
 
     public function __construct(PropertyRepository $repository, ObjectManager $em)
@@ -28,7 +22,7 @@ class AdminPropertyController extends AbstractController
         $this->repository = $repository;
         $this->em = $em;
     }
-
+    // -----------
 
 
 
@@ -137,6 +131,6 @@ class AdminPropertyController extends AbstractController
 
 
 
-    
+
 
 }

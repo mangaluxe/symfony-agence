@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Pour class 
 class PropertyController extends AbstractController
 {
 
+    // ------ Contructeur pour Injection de dépendance : -----
     /**
      * @var PropertyRepository
      */
@@ -21,12 +22,12 @@ class PropertyController extends AbstractController
      */
     private $em;
 
-
     public function __construct(PropertyRepository $repository, ObjectManager $em)
     {
         $this->repository = $repository;
         $this->em = $em;
     }
+    // -----------
 
 
     /**
@@ -51,7 +52,7 @@ class PropertyController extends AbstractController
         $property = $this->repository->findAllVisible();
         // dump($property);
 
-        // $property[0]->setSold(true);
+        // $property[0]->setSold(true); // Changer le premier bien en vendu (une des méthodes possibles)
         // $this->em->flush();
         
         return $this->render('property/index.html.twig', [
