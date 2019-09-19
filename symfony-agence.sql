@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 19 sep. 2019 à 13:39
--- Version du serveur :  10.4.6-MariaDB
--- Version de PHP :  7.3.9
+-- Généré le :  jeu. 19 sep. 2019 à 18:08
+-- Version du serveur :  10.1.37-MariaDB
+-- Version de PHP :  7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,7 +59,7 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 CREATE TABLE `property` (
   `id` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
   `surface` int(11) NOT NULL,
   `rooms` int(11) NOT NULL,
   `bedrooms` int(11) NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `property` (
   `heat` int(11) NOT NULL,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `postal_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sold` tinyint(1) NOT NULL DEFAULT 0,
+  `sold` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` datetime NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -78,7 +78,7 @@ CREATE TABLE `property` (
 --
 
 INSERT INTO `property` (`id`, `title`, `description`, `surface`, `rooms`, `bedrooms`, `floor`, `price`, `heat`, `city`, `postal_code`, `sold`, `created_at`, `address`) VALUES
-(16, 'magnam cumque voluptatem', 'Alias nemo vitae eum molestias tempora et. Qui distinctio architecto et vitae. Atque et aliquam delectus autem quisquam doloremque eaque.', 53, 10, 9, 5, 65419, 1, 'Clement-sur-Mer', '30552', 0, '2019-09-19 12:09:26', '37, avenue Alphonse Lacombe\n56698 Girard-les-Bains'),
+(16, 'Je suis un titre edité', 'Alias nemo vitae eum molestias tempora et. Qui distinctio architecto et vitae. Atque et aliquam delectus autem quisquam doloremque eaque.', 53, 10, 9, 5, 65419, 1, 'Clement-sur-Mer', '30552', 0, '2019-09-19 12:09:26', '37, avenue Alphonse Lacombe56698 Girard-les-Bains'),
 (17, 'ipsam doloremque assumenda', 'Nulla dolorem blanditiis at suscipit praesentium. Quia eos laudantium eum incidunt sunt. Ea amet aliquam voluptatem placeat.', 138, 3, 7, 8, 561855, 1, 'Berthelot', '00931', 0, '2019-09-19 12:09:26', '42, rue de Chretien\n54 849 Gaillard'),
 (18, 'rerum voluptas earum', 'Quia ullam voluptatem aperiam totam. Quos id officia neque nulla sint temporibus. Et tempore voluptatem adipisci ut et asperiores.', 74, 8, 4, 6, 77903, 0, 'DanielVille', '35898', 0, '2019-09-19 12:09:26', '97, chemin de Olivier\n89 256 Gilletboeuf'),
 (19, 'quo corrupti sed', 'Hic rerum culpa incidunt et sit ut eligendi. Accusamus et occaecati vel. Illo quos eos quam molestias velit labore rem consequuntur.', 244, 4, 5, 9, 995171, 0, 'Hamel', '01 630', 0, '2019-09-19 12:09:26', 'rue Théophile Maillot\n96958 Carpentier'),
@@ -96,8 +96,7 @@ INSERT INTO `property` (`id`, `title`, `description`, `surface`, `rooms`, `bedro
 (31, 'repellat pariatur tenetur', 'Velit ab ipsa corrupti cumque ducimus dolore pariatur. Modi debitis et voluptates illum nobis. Nihil aut qui quasi deleniti quas.', 129, 10, 9, 5, 836445, 0, 'Delaunaydan', '09950', 0, '2019-09-19 12:09:26', '44, rue Margaud Dumas\n01010 Rochedan'),
 (32, 'in nesciunt amet', 'Et alias a inventore veritatis. Id vero aliquid quod eligendi quidem sunt. Magnam qui sit quo aliquam.', 122, 2, 3, 3, 123673, 0, 'Pichon-la-Forêt', '77 555', 0, '2019-09-19 12:09:26', 'chemin Adrienne Rossi\n35 141 Gallet-la-Forêt'),
 (33, 'voluptate porro quaerat', 'Laudantium sint adipisci occaecati illo. Non ab officiis repellendus recusandae. Similique voluptate quae maxime id tempore officiis autem.', 75, 2, 9, 6, 443822, 1, 'Denis', '23 729', 0, '2019-09-19 12:09:26', '6, place Jacques\n32 091 Le Gallboeuf'),
-(34, 'repellendus et sed', 'Et reprehenderit omnis ut impedit. Qui veniam aliquam optio et reprehenderit voluptas dolores. Amet ab similique non qui.', 26, 5, 4, 9, 876595, 1, 'Brunel', '17910', 0, '2019-09-19 12:09:26', '5, boulevard Colin\n34 892 NavarroVille'),
-(35, 'alias voluptatibus fugiat', 'Quam iure magnam rem illum nam sequi temporibus. Alias dolor enim sequi dolorem suscipit voluptatum. Cum molestiae voluptatibus et dolores corporis earum soluta neque.', 150, 4, 8, 9, 776446, 0, 'Dupre', '52 571', 0, '2019-09-19 12:09:26', '23, rue Dominique Noel\n96986 Costa-sur-Blin');
+(34, 'repellendus et sed', 'Et reprehenderit omnis ut impedit. Qui veniam aliquam optio et reprehenderit voluptas dolores. Amet ab similique non qui.', 26, 5, 4, 9, 876595, 1, 'Brunel', '17910', 0, '2019-09-19 12:09:26', '5, boulevard Colin\n34 892 NavarroVille');
 
 -- --------------------------------------------------------
 
@@ -111,6 +110,13 @@ CREATE TABLE `user` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `email`) VALUES
+(5, '1234', '$2y$13$Soml1.v8GjAghTeK8HGwbu1DG6JEcBePzpMDimskUemmdDlYlzEkO', '1234@1234.fr');
 
 --
 -- Index pour les tables déchargées
@@ -148,7 +154,7 @@ ALTER TABLE `property`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
