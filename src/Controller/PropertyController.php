@@ -99,7 +99,7 @@ class PropertyController extends AbstractController
 
     
     /**
-     * ========================================= Affiche 1 bien =========================================
+     * ========================================= Affiche 1 bien (avec slug) =========================================
      * @Route("/biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
      * @ Property $property
      */
