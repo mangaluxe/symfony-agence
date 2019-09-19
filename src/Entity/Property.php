@@ -133,8 +133,9 @@ class Property
 
         return $this;
     }
+    
 
-
+    // Ajouté:
     public function getSlug(): string
     {
         return (new Slugify())->slugify($this->title);

@@ -34,6 +34,7 @@ class AdminPropertyController extends AbstractController
 
 
     /**
+     * ========================================= Affiche liste de biens =========================================
      * @Route("/admin", name="admin.property.index")
      */
     public function index()
@@ -47,6 +48,7 @@ class AdminPropertyController extends AbstractController
 
 
     /**
+     * ========================================= Créer un bien =========================================
      * @Route("/admin/property/create", name="admin.property.new")
      */
     public function new(Request $request)
@@ -79,6 +81,7 @@ class AdminPropertyController extends AbstractController
 
 
     /**
+     * ========================================= Editer un bien =========================================
      * @Route("/admin/property/{id}", name="admin.property.edit", methods="GET|POST") // Ici, on dit qu'on accepte que les requetes GET et POST pour distinguer avec DELETE
      * @param Property $property
      * @param Request $request
@@ -112,6 +115,7 @@ class AdminPropertyController extends AbstractController
 
 
     /**
+     * ========================================= Supprimer un bien =========================================
      * @Route("/admin/property/{id}", name="admin.property.delete", methods="DELETE")
      * @param Property $property
      * @param Request $request
@@ -133,8 +137,6 @@ class AdminPropertyController extends AbstractController
 
 
 
-
-
-
+    
 
 }

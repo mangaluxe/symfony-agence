@@ -30,37 +30,38 @@ class PropertyController extends AbstractController
 
 
     /**
+     * ========================================= Affiche liste de biens =========================================
      * @Route("/biens", name="property.index")
      * @return Response
      */
     public function index(): Response
     {
 
-        // // ========== 1er méthode (sans injection de dépendance) : ========== 
+        // // ---------- 1er méthode (sans injection de dépendance) : ----------
         // $repository = $this->getDoctrine()->getRepository(Property::class);
         // dump($repository);
         // $property = $repository->findAllVisible();
         // dump($property);
 
-        // // ========== 2e méthode (avec injection de dépendance dans constructeur) : ========== 
+        // // ---------- 2e méthode (avec injection de dépendance dans constructeur) : ----------
         // $property = $this->repository->find(1);
         // $property = $this->repository->findAll();
         // $property = $this->repository->findOneBy(['floor' => 4]);
 
         $property = $this->repository->findAllVisible();
-        dump($property);
+        // dump($property);
 
         // $property[0]->setSold(true);
-
         // $this->em->flush();
         
         return $this->render('property/index.html.twig', [
-            // 'current_menu' => 'properties'
+            'properties' => $property
         ]);
     }
 
     
     /**
+     * ========================================= Affiche 1 bien =========================================
      * @Route("/biens/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
      * @ Property $property
      */
