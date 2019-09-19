@@ -77,11 +77,13 @@ class PropertyController extends AbstractController
 
         // ------ Avec injection de dépendance -----
 
+        $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans Repository\PropertyRepository.php
+
         $limit = 4;
         $start = $page * $limit - $limit;
         // 1*10 - 10 = 0
         // 2*10 - 10 = 10 // Explique pourquoi $start = $page * $limit - $limit;
-        $total = count($this->repository->findAll());
+        $total = count($property);
         $pages = ceil($total / $limit); // ceil arrondit au nb supérieur
 
         return $this->render('property/index_pagination.html.twig', [
