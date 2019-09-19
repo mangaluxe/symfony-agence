@@ -1,0 +1,103 @@
+﻿Fixtures : pour créer de fausses données dans la BDD
+==========================================================
+
+Installer dans Cmder : composer require orm-fixtures --dev
+
+php bin/console make:fixtures
+
+PropertyFixtures
+
+=============
+Mettre dans le fichier PropertyFixtures.php :
+=============
+
+<?php
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\Property; // Ajouté
+
+class PropertyFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        // Ajouté :
+        for ($i=1; $i<20; $i++)
+        {
+            $property = new property();
+
+            $property->setTitle("Titre n°$i")
+                    ->setDescription("Contenu du titre n°$i")
+                    ->setCreatedAt(new \DateTime());
+            
+            $manager->persist($property);
+
+        }
+
+        $manager->flush(); // flush: sauvegarde les objets suivis dans le manager
+    }
+}
+
+
+=============
+
+php bin/console doctrine:fixtures:load
+y
+
+
+==========================================================
+Faker : pour créer de fausses données aléatoires dans la BDD
+==========================================================
+
+composer require fzaninotto/faker --dev
+
+=============
+Mettre dans le fichier PropertyFixtures.php :
+=============
+
+<?php
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
+use Faker\Factory; // Ajouté pour utiliser Faker
+use App\Entity\Property; // Ajouté
+
+
+class PropertyFixtures extends Fixture
+{
+    public function load(ObjectManager $manager)
+    {
+        // $faker = Faker\Factory::create('fr_FR'); // Marche aussi
+        $faker = Factory::create('fr_FR');
+
+        for ($i=0; $i<20; $i++)
+        {
+            $property = new property();
+
+            $property->setTitle($faker->words(3, true))
+                    ->setDescription($faker->sentences(3, true))
+                    ->setSurface($faker->numberBetween(20, 350))
+                    ->setRooms($faker->numberBetween(2, 10))
+                    ->setBedrooms($faker->numberBetween(1, 9))
+                    ->setFloor($faker->numberBetween(2, 10))
+                    ->setPrice($faker->numberBetween(10000, 1000000))
+                    ->setHeat($faker->numberBetween(0, count(Property::HEAT) - 1))
+                    ->setCity($faker->city)
+                    ->setAddress($faker->address)
+                    ->setPostalCode($faker->postcode)
+                    ->setSold(false);            
+            $manager->persist($property);
+
+        }
+
+        $manager->flush();
+    }
+}
+
+
+=============
+
+php bin/console doctrine:fixtures:load
+y

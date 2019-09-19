@@ -45,12 +45,13 @@ class PropertyController extends AbstractController
         // dump($property);
 
         // // ---------- 2e méthode (avec injection de dépendance dans constructeur) : ----------
-        // $property = $this->repository->find(3);
-        // $property = $this->repository->findAll();
-        // $property = $this->repository->findOneBy(['floor' => 4]);
-        // $property = $this->repository->findLatest();
+        // $property = $this->repository->findAll(); // findAll() est natif dans Symfony
 
-        $property = $this->repository->findAllVisible();
+        // $property = $this->repository->findOneBy(['floor' => 4]);
+        // $property = $this->repository->find(3);
+        // $property = $this->repository->findLatest(); // Fonctions qu'on a créé dans Repository\PropertyRepository.php
+
+        $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans Repository\PropertyRepository.php
         // dump($property);
 
         // $property[0]->setSold(true); // Changer le premier bien en vendu (une des méthodes possibles)

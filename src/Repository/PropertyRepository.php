@@ -21,6 +21,8 @@ class PropertyRepository extends ServiceEntityRepository
         parent::__construct($registry, Property::class);
     }
 
+
+    // ---------- Ajoutés : ----------
     /**
      *
      * @return Property[]

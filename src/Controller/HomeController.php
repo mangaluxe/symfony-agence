@@ -17,7 +17,7 @@ class HomeController extends AbstractController
      */
     public function index(PropertyRepository $repository) // Sans constructeur pour l'injection de dépendance, on ajoute "PropertyRepository $repository" en paramètre de la fonction
     {
-        $properties = $repository->findLatest(); // findAllVisible(); findAll();
+        $properties = $repository->findLatest(); // Fonction qu'on a créé dans Repository\PropertyRepository.php. findAll() est natif dans Symfony
 
         return $this->render('pages/home.html.twig', [
             'properties' => $properties
