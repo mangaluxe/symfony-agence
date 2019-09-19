@@ -31,8 +31,8 @@ class PropertyController extends AbstractController
 
 
     /**
-     * ========================================= Affiche liste de biens =========================================
-     * @Route("/biens", name="property.index")
+     * ========================================= Affiche liste de biens (sans pagination) =========================================
+     * @Route("/biens", name="property.index_all")
      * @return Response
      */
     public function index(): Response
@@ -45,9 +45,10 @@ class PropertyController extends AbstractController
         // dump($property);
 
         // // ---------- 2e méthode (avec injection de dépendance dans constructeur) : ----------
-        // $property = $this->repository->find(1);
+        // $property = $this->repository->find(3);
         // $property = $this->repository->findAll();
         // $property = $this->repository->findOneBy(['floor' => 4]);
+        // $property = $this->repository->findLatest();
 
         $property = $this->repository->findAllVisible();
         // dump($property);
@@ -55,10 +56,43 @@ class PropertyController extends AbstractController
         // $property[0]->setSold(true); // Changer le premier bien en vendu (une des méthodes possibles)
         // $this->em->flush();
         
-        return $this->render('property/index.html.twig', [
+        return $this->render('property/index_all.html.twig', [
             'properties' => $property
         ]);
     }
+
+
+
+
+
+
+    /**
+    * ======================================== Affiche liste de biens avec pagination ========================================
+    * @Route("/biens/page/{page<\d+>?1}", name="property.index")
+    * // Regex : d pour nombre, + pour un ou plusieurs, ? pour optionnel, 1 pour valeur par défaut
+    */
+    public function index_pagination($page = 1)
+    {
+
+        // ------ Avec injection de dépendance -----
+
+        $limit = 4;
+        $start = $page * $limit - $limit;
+        // 1*10 - 10 = 0
+        // 2*10 - 10 = 10 // Explique pourquoi $start = $page * $limit - $limit;
+        $total = count($this->repository->findAll());
+        $pages = ceil($total / $limit); // ceil arrondit au nb supérieur
+
+        return $this->render('property/index_pagination.html.twig', [
+            'properties' => $this->repository->findBy([], [], $limit, $start),
+            'pages' => $pages,
+            'page' => $page
+
+        ]);
+
+    }
+
+
 
     
     /**
@@ -79,13 +113,8 @@ class PropertyController extends AbstractController
 
         return $this->render('property/show.html.twig', [
             'property' => $property,
-            // 'current_menu' => 'properties'
         ]);
     }
-
-
-
-
 
 
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -133,7 +132,7 @@ class Property
 
         return $this;
     }
-    
+
 
     // Ajouté:
     public function getSlug(): string

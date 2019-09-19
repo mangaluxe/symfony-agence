@@ -35,7 +35,11 @@ class AdminPropertyController extends AbstractController
     {
         $properties = $this->repository->findAll();
 
-        return $this->render('admin/property/index.html.twig', compact ('properties'));
+        return $this->render('admin/property/index.html.twig', [
+            'properties' => $properties, // Paramètres. On utilise properties.id, properties.title pour afficher dans fichiers twig
+        ]);
+
+        // return $this->render('admin/property/index.html.twig', compact ('properties')); // Marche aussi
     }
 
 
@@ -64,7 +68,7 @@ class AdminPropertyController extends AbstractController
         }
 
         return $this->render('admin/property/new.html.twig', [
-            'property' => $property, // Paramètres. On utilise property.id, property.title pour afficher dans fichiers twig
+            'property' => $property,
             'form' => $form->createView()
         ]);
 

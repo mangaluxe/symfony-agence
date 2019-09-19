@@ -25,7 +25,7 @@
             <tbody>
             {% for property in properties %}
             <tr>
-                <td>{{ property.title }}</td>
+                <td><a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a></td>
 
                 {% if property.sold == 1 %}
                 <td>Vendu</td>
