@@ -48,7 +48,7 @@ class PropertyRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    
+
     
     /**
      * // Pour Filtre :
@@ -81,7 +81,6 @@ class PropertyRepository extends ServiceEntityRepository
                 ->andWhere('p.surface >= :maxsurface')
                 ->setParameter('maxsurface', $search->getMaxSurface());
         }
-
     
         return $query->getQuery();
     }

@@ -103,7 +103,7 @@ class PropertyController extends AbstractController
 
 
     /**
-    * ======================================== Affiche liste de biens avec Filtre ========================================
+    * ======================================== Affiche liste de biens avec Filtre (ne marche pas) ========================================
     * @Route("/biens/filtre", name="property.index_filtre")
     * @return Response
     */
@@ -117,11 +117,11 @@ class PropertyController extends AbstractController
         $form->handleRequest($request);
         
 
-        $property = $this->repository->findAllVisibleQuery($search); // Fonction qu'on a créé dans Repository\PropertyRepository.php
+        $properties = $this->repository->findAllVisibleQuery($search); // Fonction qu'on a créé dans Repository\PropertyRepository.php
 
         return $this->render('property/index_filtre.html.twig', [
-            'form' => $form->createView(), // Ajouté pour Filtre
-            'properties' => $property
+            'properties' => $properties,
+            'form' => $form->createView() // Ajouté pour Filtre
         ]);
         
     }
@@ -146,7 +146,7 @@ class PropertyController extends AbstractController
         $form->handleRequest($request);
         
 
-        // // ------ Pagination -----
+        // ------ Pagination -----
 
         // $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans src\Repository\PropertyRepository.php
         $property = $this->repository->findAllVisibleQuery($search); // Fonction qu'on a créé dans src\Repository\PropertyRepository.php pour Filtre
