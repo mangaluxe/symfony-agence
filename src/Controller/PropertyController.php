@@ -1,12 +1,15 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response; // Que pour les textes. Plus besoin pour $this->render('property/index.html.twig');
-use App\Repository\PropertyRepository; // Utiliser injection de dépendance
+use Symfony\Component\HttpFoundation\Request; // Ajouté pour filtre
 use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\PropertySearch; // Ajouté pour filtre
+use App\Form\PropertySearchType; // Ajouté pour filtre
 use App\Entity\Property; // Ajouté pour recup données dans BDD
 use Symfony\Component\Routing\Annotation\Route; // Pour Routes
+use App\Repository\PropertyRepository; // Utiliser injection de dépendance
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Pour class extends
+use Symfony\Component\HttpFoundation\Response; // Que pour les textes. Plus besoin pour $this->render('property/index.html.twig');
 
 class PropertyController extends AbstractController
 {
@@ -68,14 +71,15 @@ class PropertyController extends AbstractController
 
 
     /**
-    * ======================================== Affiche liste de biens avec pagination ========================================
-    * @Route("/biens/page/{page<\d+>?1}", name="property.index")
+    * ======================================== Affiche liste de biens avec Pagination ========================================
+    * @Route("/biens/pages/{page<\d+>?1}", name="property.index")
     * // Regex : d pour nombre, + pour un ou plusieurs, ? pour optionnel, 1 pour valeur par défaut
     */
     public function index_pagination($page = 1)
+    // public function index_pagination($page = 1)
     {
 
-        // ------ Avec injection de dépendance -----
+        // ------ Pagination -----
 
         $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans src\Repository\PropertyRepository.php
 
@@ -90,9 +94,75 @@ class PropertyController extends AbstractController
             'properties' => $this->repository->findBy([], [], $limit, $start),
             'pages' => $pages,
             'page' => $page
-
         ]);
 
+    }
+
+
+
+
+
+    /**
+    * ======================================== Affiche liste de biens avec Filtre ========================================
+    * @Route("/biens/filtre", name="property.index_filtre")
+    * @return Response
+    */
+    public function index_filtre(Request $request): Response
+    {
+
+        // ------ Filtre -----
+
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+        
+
+        $property = $this->repository->findAllVisibleQuery($search); // Fonction qu'on a créé dans Repository\PropertyRepository.php
+
+        return $this->render('property/index_filtre.html.twig', [
+            'form' => $form->createView(), // Ajouté pour Filtre
+            'properties' => $property
+        ]);
+        
+    }
+
+
+
+
+
+    /**
+    * ======================================== Affiche liste de biens avec Pagination + Filtre (ne marche pas) ========================================
+    * @Route("/biens/page/{page<\d+>?1}", name="property.index_pagination_filtre")
+    * // Regex : d pour nombre, + pour un ou plusieurs, ? pour optionnel, 1 pour valeur par défaut
+    */
+    public function index_pagination_filtre($page = 1, Request $request)
+    // public function index_pagination($page = 1)
+    {
+
+        // ------ Filtre -----
+
+        $search = new PropertySearch();
+        $form = $this->createForm(PropertySearchType::class, $search);
+        $form->handleRequest($request);
+        
+
+        // // ------ Pagination -----
+
+        // $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans src\Repository\PropertyRepository.php
+        $property = $this->repository->findAllVisibleQuery($search); // Fonction qu'on a créé dans src\Repository\PropertyRepository.php pour Filtre
+
+        $limit = 4;
+        $start = $page * $limit - $limit;
+        $total = count($property);
+        $pages = ceil($total / $limit);
+
+        return $this->render('property/index_pagination_filtre.html.twig', [
+            'form' => $form->createView(), // Ajouté pour Filtre
+            'properties' => $this->repository->findBy([], [], $limit, $start),
+            'pages' => $pages,
+            'page' => $page
+        ]);
+        
     }
 
 

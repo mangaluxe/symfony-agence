@@ -5,19 +5,28 @@
 {% block body %}
 
 <div class="jumbotron text-center">
-    <h1>Liste de tous les biens (avec pagination)</h1>
+    <h1>Liste de tous les biens (avec filtre)</h1>
 
-    {# Pagination #}
-    <div class="center mt-5">
-        <div class="pagination">
-            <a class="{% if page == 1 %}disabled{% endif %}" href="{{ path('property.index', {'page': page - 1}) }}"> « </a>
+    {# Filtre #}
+    <div class="container left my-4">
+        {{ form_start(form) }}
 
-            {% for i in 1..pages %}
-            <a class="page-item {% if page == i %}active{% endif %}" href="{{ path('property.index', {'page': i}) }}">{{ i }}</a>
+            <div class="form">
+                {{ form_row(form.minPrice) }}
+            </div>
+            <div class="form">
+                {{ form_row(form.maxPrice) }}
+            </div>
+            <div class="form">
+                {{ form_row(form.minSurface) }}
+            </div>
+            <div class="form">
+                {{ form_row(form.maxSurface) }}
+            </div>
 
-            {% endfor %}
-            <a class="page-item {% if page == pages %}disabled{% endif %}" href="{{ path('property.index', {'page': page + 1}) }}"> » </a>
-        </div>
+            <button type="submit" class="btn btn-success">Envoyer</button>
+
+        {{ form_end(form) }}
     </div>
 
 </div>
