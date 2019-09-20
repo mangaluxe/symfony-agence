@@ -77,7 +77,7 @@ class PropertyController extends AbstractController
 
         // ------ Avec injection de dépendance -----
 
-        $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans Repository\PropertyRepository.php
+        $property = $this->repository->findAllVisible(); // Fonction qu'on a créé dans src\Repository\PropertyRepository.php
 
         $limit = 4;
         $start = $page * $limit - $limit;
