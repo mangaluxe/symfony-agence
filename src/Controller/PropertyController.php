@@ -103,7 +103,7 @@ class PropertyController extends AbstractController
 
 
     /**
-    * ======================================== Affiche liste de biens avec Filtre (ne marche pas) ========================================
+    * ======================================== Affiche liste de biens avec Filtre ========================================
     * @Route("/biens/filtre", name="property.index_filtre")
     * @return Response
     */
@@ -117,7 +117,10 @@ class PropertyController extends AbstractController
         $form->handleRequest($request);
         
 
-        $properties = $this->repository->findAllVisibleQuery($search); // Fonction qu'on a créé dans Repository\PropertyRepository.php
+        $properties = $this->repository->findAllVisibleQuery($search)->getResult(); // Fonction qu'on a créé dans Repository\PropertyRepository.php
+        
+        // dump($properties);
+
 
         return $this->render('property/index_filtre.html.twig', [
             'properties' => $properties,
