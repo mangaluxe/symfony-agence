@@ -164,6 +164,7 @@ class PropertyController extends AbstractController
 
         return $this->render('property/index_pagination_filtre.html.twig', [
             'form' => $form->createView(), // Ajouté pour Filtre
+            // 'properties' => $this->repository->findBy([], [], $limit, $start),
             'properties' => $property,
             'pages' => $pages,
             'page' => $page
