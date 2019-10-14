@@ -33,20 +33,20 @@
     {# Pagination #}
     <div class="center mt-5">
         <div class="pagination">
-            <a class="{% if page == 1 %}disabled{% endif %}" href="{{ path('property.index_filtre', {'page': page - 1}) }}"> « </a>
+            <a class="{% if page == 1 %}disabled{% endif %}" href="{{ path('property.index_pagination_filtre', {'page': page - 1}) }}"> « </a>
 
             {% for i in 1..pages %}
-            <a class="page-item {% if page == i %}active{% endif %}" href="{{ path('property.index_filtre', {'page': i}) }}">{{ i }}</a>
+            <a class="page-item {% if page == i %}active{% endif %}" href="{{ path('property.index_pagination_filtre', {'page': i}) }}">{{ i }}</a>
 
             {% endfor %}
-            <a class="page-item {% if page == pages %}disabled{% endif %}" href="{{ path('property.index_filtre', {'page': page + 1}) }}"> » </a>
+            <a class="page-item {% if page == pages %}disabled{% endif %}" href="{{ path('property.index_pagination_filtre', {'page': page + 1}) }}"> » </a>
         </div>
     </div>
 
 </div>
 
 <div class="container">
-    <h2>Liste de tous les biens</h2>
+    <h2>Résultat(s) :</h2>
     <div class="row flex">
     {% for property in properties %}
         <div class="col-3">
