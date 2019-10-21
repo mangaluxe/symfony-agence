@@ -42,10 +42,10 @@ class User implements UserInterface
      */
     public $confirm_password;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $role;
+    // /**
+    //  * @ORM\Column(type="string", length=255)
+    //  */
+    // private $role;
 
 
     public function getId(): ?int

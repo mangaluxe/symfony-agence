@@ -21,7 +21,7 @@ home:
   path: /
   controller: App\Controller\HomeController::index
 
-- Créer fichier HomeCOntroller.php :
+- Créer fichier HomeController.php :
 
 namespace App\Controller;
 

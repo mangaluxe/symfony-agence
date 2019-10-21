@@ -14,7 +14,7 @@ class SecurityController extends AbstractController
 {
 
     // ------ Contructeur pour Injection de dépendance : -----
-    private $repo;
+    // private $repo;
     private $em;
 
     public function __construct(ObjectManager $em)

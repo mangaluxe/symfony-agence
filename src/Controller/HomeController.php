@@ -1,7 +1,7 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Component\HttpFoundation\Response; // Que pour les textes. Plus besoin pour $this->render('pages/index.html.twig');
+// use Symfony\Component\HttpFoundation\Response; // Que pour les textes. Plus besoin pour $this->render('pages/index.html.twig');
 use Symfony\Component\Routing\Annotation\Route; // Pour Routes
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController; // Pour class extends
 use App\Repository\PropertyRepository; // Pour l'injection de dépendance

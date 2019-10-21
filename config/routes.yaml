@@ -2,6 +2,12 @@ home:
   path: /
   controller: App\Controller\HomeController::index
 
+profil:
+  path: /profil/{username}
+  controller: App\Controller\ProfilController::index
+  defaults:
+    username: Invite
+
 
 #index:
 #    path: /

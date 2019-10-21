@@ -1,0 +1,13 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="jumbotron text-center">
+
+        <h1>Bienvenue sur votre profil !</h1>
+
+        {% for pr in prof %}
+            <h2>{{ pr.username }}</h2>
+        {% endfor %}
+
+    </div>
+{% endblock %}
