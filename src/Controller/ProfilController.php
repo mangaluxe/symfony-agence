@@ -28,7 +28,8 @@ class ProfilController extends AbstractController
         $profil = $this->repo->find($username);
 
         return $this->render('security/profil.html.twig', [
-            'prof' => $profil
+            'prof' => $profil,
+            // 'username' => getUsername()
         ]);
     }
 }

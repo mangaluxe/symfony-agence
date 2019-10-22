@@ -3,10 +3,9 @@
 {% block body %}
     <div class="jumbotron text-center">
 
-        <h1>Bienvenue sur votre profil !</h1>
-
         {% for pr in prof %}
-            <h2>{{ pr.username }}</h2>
+            <h1>Le profil de {{ pr.username }}</h1>
+            <h2>Son email : {{ pr.email }}</h2>
         {% endfor %}
 
     </div>
